@@ -1,30 +1,27 @@
 import { createStore } from 'redux';
-
-
-const reducer = (state = 0, action) => {
- 
-  switch (action.type) {
-    case 'INC':
-      return state + 1;
-    case 'DEC':
-      return state - 1;
-    default:
-      return state;    
-  }
-};
+import reducer from './reducer';
+import { inc, dec ,rnd } from './actions'
 
 const store = createStore(reducer);
+
 
 document
   .getElementById('inc')
   .addEventListener('click', () => {
-    store.dispatch({type: 'INC'})
+    store.dispatch(inc())
+});
+
+document
+  .getElementById('rnd')
+  .addEventListener('click', () => {
+    const payload = Math.floor(Math.random()*10);
+    store.dispatch(rnd(payload))
 });
 
 document
   .getElementById('dec')
   .addEventListener('click', () => {
-    store.dispatch({type: 'DEC'})
+    store.dispatch(dec())
 });
 
 const update = () => {
